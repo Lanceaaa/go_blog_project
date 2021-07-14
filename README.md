@@ -15,3 +15,8 @@ blog-service目录结构如下：
 --storage           项目生成的临时文件
 --scripts           各类构建、安装、分析等操作的脚本
 --third_party       第三方的资源工具、如Swagger UI
+
+go get -u github.com/gin-gonic/gin@v1.6.3
+go get -u github.com/spf13/viper@v1.4.0
+go get -u github.com/jinzhu/gorm@v1.9.12
+go get -u gopkg.in/natefinch/lumberjack.v2
