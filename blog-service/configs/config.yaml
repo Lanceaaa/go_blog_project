@@ -16,7 +16,7 @@ Database:
   DBType: mysql
   Username: root
   Password: 123456
-  Host: 127.0.0.1:3306
+  Host: 192.168.0.188:3306
   DBName: go
   TablePrefix: blog_
   Charset: utf8

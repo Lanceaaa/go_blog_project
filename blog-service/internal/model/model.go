@@ -2,10 +2,11 @@ package model
 
 import (
 	"fmt"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+
 	"github.com/go-programming-tour-book/blog-service/global"
 	"github.com/go-programming-tour-book/blog-service/pkg/setting"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 type Model struct {
@@ -19,15 +20,10 @@ type Model struct {
 }
 
 func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
-	s := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=%s&parseTime=%t&loc=Local")
-	db, err := gorm.Open(databaseSetting.DBType, s,
-		databaseSetting.Username,
-		databaseSetting.Password,
-		databaseSetting.Host,
-		databaseSetting.DBName,
-		databaseSetting.Charset,
-		databaseSetting.ParseTime,
-	)
+	s := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=%s&parseTime=%t&loc=Local", databaseSetting.Username, databaseSetting.Password, databaseSetting.Host, databaseSetting.DBName, databaseSetting.Charset, databaseSetting.ParseTime)
+	fmt.Println(s)
+	db, err := gorm.Open(databaseSetting.DBType, s)
+
 	if err != nil {
 		return nil, err
 	}
