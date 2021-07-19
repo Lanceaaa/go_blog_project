@@ -14,6 +14,10 @@ import (
 	lumberjack "gopkg.in/natefinch/lumberjack.v2"
 )
 
+// @title 博客系统
+// @version 1.0
+// @description Go语言做博客系统
+// @termsOfService https://github.com/Lanceaaa/go_blog_project
 func init() {
 	// 初始化配置
 	err := setupSetting()

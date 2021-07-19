@@ -3,12 +3,19 @@ package routers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-programming-tour-book/blog-service/internal/routers/api/v1"
+	_ "github.com/go-programming-tour-book/blog-service/docs"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
 func NewRouter() *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
+	// 指定swagger的doc.json路径
+	// url := ginSwagger.URL("http://127.0.0.1:8000/swagger/doc.json")
+	url := ginSwagger.URL("doc.json")
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
 	article := v1.NewArticle()
 	tag := v1.NewTag()

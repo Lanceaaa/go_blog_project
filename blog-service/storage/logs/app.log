@@ -1,1 +1,8 @@
 2021/07/15 12:09:46 {"callers":["/go/src/blog-service/main.go: 28 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626350986689453800}
+2021/07/15 12:47:54 {"callers":["/go/src/blog-service/main.go: 28 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626353274662762900}
+2021/07/19 12:01:56 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626696116619504700}
+2021/07/19 12:02:30 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626696150786888200}
+2021/07/19 12:08:53 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626696533492983700}
+2021/07/19 12:11:23 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626696683565648600}
+2021/07/19 12:14:48 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626696888313089100}
+2021/07/19 12:26:18 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626697578931157000}
