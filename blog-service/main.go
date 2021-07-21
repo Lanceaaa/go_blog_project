@@ -43,7 +43,7 @@ func main() {
 	// r.Run()
 
 	// test code
-	global.Logger.Infof("%s: go-programming-tour-book/%s", "lance", "blog-service")
+	// global.Logger.Infof("%s: go-programming-tour-book/%s", "lance", "blog-service")
 
 	gin.SetMode(global.ServerSetting.RunMode)
 	router := routers.NewRouter()

@@ -6,3 +6,6 @@
 2021/07/19 12:11:23 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626696683565648600}
 2021/07/19 12:14:48 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626696888313089100}
 2021/07/19 12:26:18 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626697578931157000}
+2021/07/20 12:50:43 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626785443980313300}
+2021/07/20 12:51:46 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"info","message":"lance: go-programming-tour-book/blog-service","time":1626785506748288000}
+2021/07/21 11:43:23 {"callers":["/go/src/blog-service/main.go: 32 main.init.0"],"level":"error","message":"app.BindAndValid errs: Key: 'State' Error:Field validation for 'State' failed on the 'oneof' tag","time":1626867803553148500}
