@@ -61,11 +61,13 @@ func (t Tag) Create(db *gorm.DB) error {
 
 // 修改标签
 func (t Tag) Update(db *gorm.DB) error {
-	db = db.Model(&Tag{}).Where("id = ? AND is_del = ?", t.ID, 0)
+	// db = db.Model(&Tag{}).Where("id = ? AND is_del = ?", t.ID, 0)
+	db = db.Model(&Tag{}).Where("is_del = ?", 0)
 	return db.Update(t).Error
 }
 
 // 删除标签
 func (t Tag) Delete(db *gorm.DB) error {
-	return db.Where("id = ? AND is_del = ?", t.ID, 0).Delete(&t).Error
+	// return db.Where("id = ? AND is_del = ?", t.ID, 0).Delete(&t).Error
+	return db.Where("is_del = ?", 0).Delete(&t).Error
 }

@@ -16,8 +16,8 @@ type ArticleListRequest struct {
 type CreateArticleRequest struct {
 	Title         string `form:"title" binding:"required,min=3,max=100"`
 	Desc          string `form:"desc" binding:"required,min=3,max=255"`
-	CoverImageUrl string `form:"cover_image_url" binding:"requreid,minx=3,max:255"`
-	CreatedBy     string `form:"created_by" binding:"requreid,min=3,max=100"`
+	CoverImageUrl string `form:"cover_image_url" binding:"required,minx=3,max:255"`
+	CreatedBy     string `form:"created_by" binding:"required,min=3,max=100"`
 	State         string `form:"state,default=1" binding:"oneof=0 1"`
 }
 
@@ -25,7 +25,7 @@ type UpdateArticleRequest struct {
 	ID            uint32 `form:"id" binding:"required,gte=1"`
 	Title         string `form:"title" binding:"min=3,max=100"`
 	Desc          string `form:"desc" binding:"required,min=3,max=255"`
-	CoverImageUrl string `form:"cover_image_url" binding:"requreid,minx=3,max:255"`
+	CoverImageUrl string `form:"cover_image_url" binding:"required,minx=3,max:255"`
 	State         uint8  `form:"state" binding:"required,oneof=0 1"`
 	ModifiedBy    string `form:"modified_by" bindding:"required,min=3,max=100"`
 }
