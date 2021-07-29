@@ -60,10 +60,15 @@ func (t Tag) Create(db *gorm.DB) error {
 }
 
 // 修改标签
-func (t Tag) Update(db *gorm.DB) error {
+func (t Tag) Update(db *gorm.DB, values interface{}) error {
 	// db = db.Model(&Tag{}).Where("id = ? AND is_del = ?", t.ID, 0)
-	db = db.Model(&Tag{}).Where("is_del = ?", 0)
-	return db.Update(t).Error
+	// db = db.Model(&Tag{}).Where("is_del = ?", 0)
+	// return db.Update(t).Error
+	if err := db.Model(t).Where("is_del = ?", 0).Updates(values).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // 删除标签

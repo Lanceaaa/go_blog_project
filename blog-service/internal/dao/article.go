@@ -31,15 +31,28 @@ func (d *Dao) CreateArticle(title, desc, coverImageUrl, createdBy string, state 
 }
 
 func (d *Dao) UpdateArticle(id uint32, title, desc, coverImageUrl string, state uint8, modifiedBy string) error {
+	// article := model.Article{
+	// 	Title:         title,
+	// 	Desc:          desc,
+	// 	CoverImageUrl: coverImageUrl,
+	// 	State:         state,
+	// 	Model:         &model.Model{ID: id, ModifiedBy: modifiedBy},
+	// }
+	// return article.Update(d.engine)
 	article := model.Article{
-		Title:         title,
-		Desc:          desc,
-		CoverImageUrl: coverImageUrl,
-		State:         state,
-		Model:         &model.Model{ID: id, ModifiedBy: modifiedBy},
+		Model: &model.Model{ID: id},
+	}
+	values := map[string]interface{}{
+		"desc":            desc,
+		"cover_image_url": coverImageUrl,
+		"state":           state,
+		"modified_by":     modifiedBy,
+	}
+	if title != "" {
+		values["title"] = title
 	}
 
-	return article.Update(d.engine)
+	return article.Update(d.engine, values)
 }
 
 func (d *Dao) DeleteArticle(id uint32) error {

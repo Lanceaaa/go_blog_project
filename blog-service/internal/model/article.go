@@ -63,9 +63,14 @@ func (a Article) Create(db *gorm.DB) error {
 }
 
 // 更新文章
-func (a Article) Update(db *gorm.DB) error {
-	db = db.Model(&Article{}).Where("is_del = ?", 0)
-	return db.Update(a).Error
+func (a Article) Update(db *gorm.DB, values interface{}) error {
+	// db = db.Model(&Article{}).Where("is_del = ?", 0)
+	// return db.Update(a).Error
+	if err := db.Model(a).Where("is_del = ?", 0).Updates(values).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // 删除文章
