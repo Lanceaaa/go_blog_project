@@ -10,4 +10,5 @@ var (
 	UnauthorizedTokenTimeout  = NewError(10000005, "鉴权失败，Token超时")
 	UnauthorizedTokenGenerate = NewError(0000006, "鉴权失败，Token生成失败")
 	TooManyRequests           = NewError(10000007, "请求过多")
+	ErrorUploadFileFail       = NewError(20030001, "上传文件失败")
 )
