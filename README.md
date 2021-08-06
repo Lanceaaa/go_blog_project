@@ -27,3 +27,5 @@
     go get -u github.com/alecthomas/template
     # validator接口校验
     go get -u github.com/go-playground/validator/v10
+    # jwt
+    go get -u github.com/dgrijalva/jwt-go@v3.2.0

@@ -34,6 +34,12 @@ type DatabaseSettingS struct {
 	MaxOpenConns int
 }
 
+type JWTSetting struct {
+	Secret string
+	Issuer string
+	Expire int64
+}
+
 func (s *Setting) ReadSection(k string, v interface{}) error {
 	err := s.vp.UnmarshalKey(k, v)
 	if err != nil {

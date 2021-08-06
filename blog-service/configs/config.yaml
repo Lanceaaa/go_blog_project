@@ -30,3 +30,8 @@ Database:
   ParseTime: True
   MaxIdleConns: 10
   MaxOpenConns: 30
+# JWT相关配置
+JWT:
+  Secret: eddycjy
+  Issuer: blog-service
+  Expire: 7200

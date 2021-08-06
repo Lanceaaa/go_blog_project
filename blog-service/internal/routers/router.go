@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-programming-tour-book/blog-service/global"
 	_ "github.com/go-programming-tour-book/blog-service/docs"
-	_ "github.com/go-programming-tour-book/blog-service/internal/middleware"
+	"github.com/go-programming-tour-book/blog-service/global"
+	"github.com/go-programming-tour-book/blog-service/internal/middleware"
 	"github.com/go-programming-tour-book/blog-service/internal/routers/api/v1"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
@@ -30,8 +30,10 @@ func NewRouter() *gin.Engine {
 	r.POST("/upload/file", upload.UploadFile)
 	// 文件静态资源访问
 	r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
+	// 生成auth
+	r.POST("/auth", v1.GetAuth)
 
-	apiv1 := r.Group("/api/v1")
+	apiv1 := r.Group("/api/v1").Use(middleware.JWT())
 	{
 		apiv1.POST("/tags", tag.Create)
 		apiv1.DELETE("/tags/:id", tag.Delete)
