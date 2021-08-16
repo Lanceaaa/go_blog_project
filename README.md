@@ -29,3 +29,7 @@
     go get -u github.com/go-playground/validator/v10
     # jwt
     go get -u github.com/dgrijalva/jwt-go@v3.2.0
+    # 发送电子邮件
+    go get -u gopkg.in/gomail.v2
+    # 限流器（令牌桶）
+    go get -u github.com/juju/ratelimit@v1.0.1

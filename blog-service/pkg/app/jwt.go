@@ -31,7 +31,7 @@ type StandardClaims struct {
 // 生成token
 func GenerateToken(appKey, appSecret string) (string, error) {
 	nowTime := time.Now()
-	expireTime := nowTime.Add(time.Duration(global.JWTSetting.Expire))
+	expireTime := nowTime.Add(global.JWTSetting.Expire)
 	claims := Claims{
 		AppKey:    util.EncodeMD5(appKey),
 		AppSecret: util.EncodeMD5(appSecret),
