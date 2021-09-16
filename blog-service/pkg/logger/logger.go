@@ -8,6 +8,8 @@ import (
 	"log"
 	"runtime"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Level int8
@@ -56,6 +58,10 @@ func NewLogger(w io.Writer, prefix string, flag int) *Logger {
 func (l *Logger) clone() *Logger {
 	nl := *l
 	return &nl
+}
+
+func (l *Logger) WithLevel(level Level) *Logger {
+	return l
 }
 
 // 设置日志公共字段
@@ -107,6 +113,18 @@ func (l *Logger) WithCallersFrames() *Logger {
 	ll := l.clone()
 	ll.callers = callers
 	return ll
+}
+
+// 讲存储进去的SpanID和traceID读取出来，然后写入日志信息中
+func (l *Logger) WithTrace() *Logger {
+	ginCtx, ok := l.ctx.(*gin.Context)
+	if ok {
+		return l.WithFields(Fields{
+			"trace_id": ginCtx.MustGet("X-Trace-ID"),
+			"span_id":  ginCtx.MustGet("X-Span-ID"),
+		})
+	}
+	return l
 }
 
 // 日志内容的格式化方法
@@ -162,6 +180,16 @@ func (l *Logger) Info(v ...interface{}) {
 func (l *Logger) Infof(format string, v ...interface{}) {
 	l.Output(LevelInfo, fmt.Sprintf(format, v...))
 }
+
+// func (l *Logger) Info(ctx context.Context, v ...interface{}) {
+// 	l = l.WithLevel(LevelInfo).WithContext(ctx).WithTrace()
+// 	l.Output(LevelInfo, fmt.Sprint(v...))
+// }
+
+// func (l *Logger) Infof(ctx context.Context, format string, v ...interface{}) {
+// 	l = l.WithLevel(LevelInfo).WithContext(ctx).WithTrace()
+// 	l.Output(LevelInfo, fmt.Sprintf(format, v...))
+// }
 
 func (l *Logger) Warn(v ...interface{}) {
 	l.Output(LevelWarn, fmt.Sprint(v...))

@@ -11,6 +11,7 @@ import (
 	"github.com/go-programming-tour-book/blog-service/internal/routers"
 	"github.com/go-programming-tour-book/blog-service/pkg/logger"
 	"github.com/go-programming-tour-book/blog-service/pkg/setting"
+	"github.com/go-programming-tour-book/blog-service/pkg/tracer"
 	lumberjack "gopkg.in/natefinch/lumberjack.v2"
 )
 
@@ -24,6 +25,7 @@ func init() {
 	if err != nil {
 		log.Fatalf("init.setupSetting err：%v", err)
 	}
+	// 初始化数据库
 	err = setupDBEngine()
 	if err != nil {
 		log.Fatalf("init.setupDBEngine err: %v", err)
@@ -32,6 +34,11 @@ func init() {
 	err = setupLogger()
 	if err != nil {
 		log.Fatalf("init.setupLogger err: %v", err)
+	}
+	// 初始化链路追踪
+	err = setupTracer()
+	if err != nil {
+		log.Fatalf("init.setupTracer err: %v", err)
 	}
 }
 
@@ -114,5 +121,17 @@ func setupLogger() error {
 		LocalTime: true,
 	}, "", log.LstdFlags).WithCaller(2)
 
+	return nil
+}
+
+func setupTracer() error {
+	jaegerTracer, _, err := tracer.NewJaegerTracer(
+		"blog-service",
+		"192.168.0.188:6831",
+	)
+	if err != nil {
+		return err
+	}
+	global.Tracer = jaegerTracer
 	return nil
 }
