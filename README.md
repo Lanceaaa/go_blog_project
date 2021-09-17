@@ -57,3 +57,21 @@ go get -u github.com/uber/jaeger-client-go@v2.22.1
 # sql 追踪
 go get -u github.com/eddycjy/opentracing-gorm
 ```
+
+# 打包进二进制文件
+```bash
+# go-bindata ...要使用最新版本
+go get -u github.com/go-bindata/go-bindata/...
+# 命令
+go-bindata -o configs/config.go -pkg=configs configs/config.yaml
+# 读取对应文件内容
+b, _ := configs.Asset("configs/config.yaml")
+```
+把第三方文件打包进二进制文件后，二进制文件必然增大，而且常规方法下无法做文件的热更新和监听，必须重启并且重新打包才能使用最新的内容。
+
+# 配置热更新
+```bash
+# 安装开源库fsnotify
+go get -u golang.org/x/sys
+go get -u github.com/fsnotify/fsnotify
+```
