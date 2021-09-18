@@ -2,7 +2,7 @@
 used gin frame
 
 ### blog-service目录结构如下：
-#### ├── configs           配置文件
+#### ├──configs           配置文件
 #### ├──docs              文档集合
 #### ├──global            全局变量
 #### ├──internal          内部模块
@@ -74,4 +74,52 @@ b, _ := configs.Asset("configs/config.yaml")
 # 安装开源库fsnotify
 go get -u golang.org/x/sys
 go get -u github.com/fsnotify/fsnotify
+```
+
+# Protobuf
+```bash
+# protoc安装 Protobuf的编译器 编译.proto文件
+wget https://github.com/google/protobuf/releases/download/v3.11.2/protobuf-all-3.11.2.zip
+unzip protobuf-all-3.11.2.zip && cd protobuf-3.11.2/
+./configure
+make
+make install
+# 检查是否安装成功
+protoc --version
+```
+```bash
+# protoc插件安装 方式1
+go get -u github.com/golang/protobuf/protoc-gen-go@v1.3.2
+# 方式2
+GIT_TAG="v1.3.2"
+go get -d -u github.com/golang/protobuf/protoc-gen-go
+git -C "$(go env GOPATH)"/src/github.com/golang/protobuf checkout $GIT_TAG
+go install github.com/golang/protobuf/protoc-gen-go
+# 将所编译安装的 Protoc Plugin 的可执行文件中移动到相应的 bin 目录
+mv $GOPATH/bin/protoc-gen-go /usr/local/go/bin/
+```
+
+# 初始化Demo项目
+```bash
+mkdir grpc-demo
+cd grpc-demo
+go mod init github.com/go-programming-tour-book/grpc-demo
+```
+
+### grpc-demo目录结构如下：
+#### ├──client           配置文件
+#### ├──proto            文档集合
+#### ├──server           全局变量
+###  └──go.mod           
+
+# 编译和生成 proto 文件
+```bash
+protoc --go_out=plugins=grpc:. ./proto/*.proto
+```
+- –go_out：设置所生成 Go 代码输出的目录，该指令会加载 protoc-gen-go 插件达到生成 Go 代码的目的，生成的文件以 .pb.go 为文件后缀，在这里 “:”（冒号）号充当分隔符的作用，后跟命令所需要的参数集，在这里代表着要将所生成的 Go 代码输出到所指向 protoc 编译的当前目录
+- plugins=plugin1+plugin2：指定要加载的子插件列表，我们定义的 proto 文件是涉及了 RPC 服务的，而默认是不会生成 RPC 代码的，因此需要在 go_out 中给出 plugins 参数传递给 protoc-gen-go，告诉编译器，请支持 RPC（这里指定了内置的 grpc 插件）。
+
+# 安装 gRPC 库
+```bash
+go get -u google.golang.org/grpc@v1.29.1
 ```
