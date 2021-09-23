@@ -3,7 +3,14 @@ syntax = "proto3";
 package helloworld;
 
 service Greeter {
-    rpc SayHello (HelloRequest) returns (HelloReply) {}
+    // // Unary RPC：一元RPC
+    rpc SayHello (HelloRequest) returns (HelloReply) {};
+    // Server-side streaming RPC：服务端流式 RPC
+    rpc SayList (HelloRequest) returns (stream HelloReply) {};
+    // Client-side streaming RPC：客户端流式 RPC
+    rpc SayRecord(stream HelloRequest) returns (HelloReply) {};
+    // Bidirectional streaming RPC：双向流式 RPC
+    rpc SayRouter(stream HelloRequest) returns (stream HelloReply) {};
 }
 
 message HelloRequest {
