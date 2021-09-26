@@ -123,3 +123,14 @@ protoc --go_out=plugins=grpc:. ./proto/*.proto
 ```bash
 go get -u google.golang.org/grpc@v1.29.1
 ```
+
+# 初始化 gRPC 服务项目
+```bash
+go mod init github.com/go-programming-tour-book/tag-service
+```
+
+# 调试 gRPC 接口
+```bash
+go get github.com/fullstorydev/grpcurl
+go install github.com/fullstorydev/grpcurl/cmd/grpcurl
+```
