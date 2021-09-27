@@ -116,6 +116,12 @@ go mod init github.com/go-programming-tour-book/grpc-demo
 ```bash
 protoc --go_out=plugins=grpc:. ./proto/*.proto
 ```
+# 如果出现如下类似报错
+```
+protoc: error while loading shared libraries: libprotobuf.so.15: cannot open shared object file: No such file or directory
+# 运行这个即可
+ldconfig
+```
 - –go_out：设置所生成 Go 代码输出的目录，该指令会加载 protoc-gen-go 插件达到生成 Go 代码的目的，生成的文件以 .pb.go 为文件后缀，在这里 “:”（冒号）号充当分隔符的作用，后跟命令所需要的参数集，在这里代表着要将所生成的 Go 代码输出到所指向 protoc 编译的当前目录
 - plugins=plugin1+plugin2：指定要加载的子插件列表，我们定义的 proto 文件是涉及了 RPC 服务的，而默认是不会生成 RPC 代码的，因此需要在 go_out 中给出 plugins 参数传递给 protoc-gen-go，告诉编译器，请支持 RPC（这里指定了内置的 grpc 插件）。
 
@@ -133,4 +139,11 @@ go mod init github.com/go-programming-tour-book/tag-service
 ```bash
 go get github.com/fullstorydev/grpcurl
 go install github.com/fullstorydev/grpcurl/cmd/grpcurl
+# 使用
+grpcurl -plaintext localhost:8001 proto.TagService.GetTagList
+```
+
+# 使用第三方开源库 cmux 实现多协议支持的功能
+```bash
+go get -u github.com/soheilhy/cmux@v0.1.4
 ```
