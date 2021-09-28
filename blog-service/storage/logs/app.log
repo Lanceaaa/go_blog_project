@@ -70,3 +70,11 @@
 2021/09/26 08:52:17 {"callers":["/go/src/blog-service/main.go: 50 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppSecret为必填字段,AppKey为必填字段","time":1632646337528601500}
 2021/09/26 08:54:19 {"callers":["/go/src/blog-service/main.go: 50 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段,AppSecret为必填字段","time":1632646459536952500}
 2021/09/26 08:54:50 {"callers":["/go/src/blog-service/main.go: 50 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段,AppSecret为必填字段","time":1632646490328416800}
+2021/09/28 06:58:44 {"callers":["/go/src/blog-service/main.go: 50 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段","time":1632812324886341600}
+2021/09/28 07:02:35 {"callers":["/go/src/blog-service/main.go: 50 main.init.0"],"level":"error","message":"svc.GetTagList err: \u003cnil\u003e","time":1632812555328896000}
+2021/09/28 07:02:49 {"callers":["/go/src/blog-service/main.go: 50 main.init.0"],"level":"error","message":"svc.GetTagList err: \u003cnil\u003e","time":1632812569632800400}
+2021/09/28 07:03:04 {"callers":["/go/src/blog-service/main.go: 50 main.init.0"],"level":"error","message":"svc.GetTagList err: \u003cnil\u003e","time":1632812584438324800}
+2021/09/28 07:05:39 {"callers":["/go/src/blog-service/main.go: 50 main.init.0"],"level":"error","message":"svc.CountTag err: Error 1054: Unknown column 'state1' in 'where clause'","time":1632812739149021500}
+2021/09/28 07:08:35 {"callers":["/go/src/blog-service/main.go: 50 main.init.0"],"level":"error","message":"svc.CountTag err: Error 1054: Unknown column 'state1' in 'where clause'","time":1632812915227961100}
+2021/09/28 07:08:36 {"callers":["/go/src/blog-service/main.go: 50 main.init.0"],"level":"error","message":"svc.CountTag err: Error 1054: Unknown column 'state1' in 'where clause'","time":1632812916790850000}
+2021/09/28 07:08:47 {"callers":["/go/src/blog-service/main.go: 50 main.init.0"],"level":"error","message":"svc.CountTag err: Error 1054: Unknown column 'state1' in 'where clause'","time":1632812927365891800}

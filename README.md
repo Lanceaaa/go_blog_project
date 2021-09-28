@@ -147,3 +147,13 @@ grpcurl -plaintext localhost:8001 proto.TagService.GetTagList
 ```bash
 go get -u github.com/soheilhy/cmux@v0.1.4
 ```
+
+# 使用 grpc-gateway 将 RESTful 转换为 gRPC请求，实现同一个 RPC 方法提供 gRPC 协议和 HTTP/1.1 的双流量支持
+```bash
+go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@v1.14.5
+mv $GOPATH/bin/protoc-gen-grpc-gateway /usr/local/go/bin/
+```
+# 在 proto 目录下用 .pb.go 和 .pb.gw.go 两种文件，对应两类功能支持
+```bash
+protoc -I/usr/local/include -I. -I$GOPATH/src -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway\@v1.14.5/third_party/googleapis --grpc-gateway_out=logtostderr=true:. ./proto/*.proto
+```
