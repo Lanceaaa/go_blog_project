@@ -148,12 +148,41 @@ grpcurl -plaintext localhost:8001 proto.TagService.GetTagList
 go get -u github.com/soheilhy/cmux@v0.1.4
 ```
 
-# 使用 grpc-gateway 将 RESTful 转换为 gRPC请求，实现同一个 RPC 方法提供 gRPC 协议和 HTTP/1.1 的双流量支持
+# 使用 grpc-gateway 将 RESTful 转换为 gRPC 请求，实现同一个 RPC 方法提供 gRPC 协议和 HTTP/1.1 的双流量支持
 ```bash
 go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@v1.14.5
 mv $GOPATH/bin/protoc-gen-grpc-gateway /usr/local/go/bin/
 ```
-# 在 proto 目录下用 .pb.go 和 .pb.gw.go 两种文件，对应两类功能支持
+
+# 执行命令在 proto 目录下生成 .pb.go 和 .pb.gw.go 两种文件，对应两类功能支持
 ```bash
 protoc -I/usr/local/include -I. -I$GOPATH/src -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway\@v1.14.5/third_party/googleapis --grpc-gateway_out=logtostderr=true:. ./proto/*.proto
+```
+
+## 使用 protoc 的插件 protoc-gen-swagger 来生成 swagger 定义
+```bash
+go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
+```
+
+## 下载 Swagger UI 文件
+> 到 https://github.com/swagger-api/swagger-ui 将其源码压缩包下载下来，然后将 dist 目录下的资源文件拷贝到项目 swagger-ui 目录中去
+
+## 使用 go-bindata 讲 Swagger UI 资源文件转换为 Go 代码
+```bash
+go get -u github.com/go-bindata/go-bindata/...
+```
+
+## 在项目 pkg 项目新建 swagger 目录，在项目根目录执行命令
+```bash
+go-bindata --nocompress -pkg swagger -o pkg/swagger/data.go third_party/swagger-ui/...
+```
+
+## 使用 go-bindata-assetfs 能结合 net/http 标准库和 go-bindata 所生成的 Swagger UI 的 Go 代码两者来供外部访问
+```bash
+go get -u github.com/elazarl/go-bindata-assetfs/...
+```
+
+## 执行命令生成 swagger.json 文件
+```bash
+protoc -I/usr/local/include -I. -I$GOPATH/src -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway\@v1.14.5/third_party/googleapis --swagger_out=logtostderr=true:. ./proto/*.proto
 ```
