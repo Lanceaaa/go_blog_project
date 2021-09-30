@@ -186,3 +186,9 @@ go get -u github.com/elazarl/go-bindata-assetfs/...
 ```bash
 protoc -I/usr/local/include -I. -I$GOPATH/src -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway\@v1.14.5/third_party/googleapis --swagger_out=logtostderr=true:. ./proto/*.proto
 ```
+
+# 拦截器的使用
+## 使用 go-grpc-middleware 实现多拦截器
+```bash
+go get -u github.com/grpc-ecosystem/go-grpc-middleware@v1.1.0
+```

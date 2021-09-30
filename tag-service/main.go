@@ -11,9 +11,11 @@ import (
 	"strings"
 
 	assetfs "github.com/elazarl/go-bindata-assetfs"
+	"github.com/go-programming-tour-book/tag-service/internal/middleware"
 	"github.com/go-programming-tour-book/tag-service/pkg/swagger"
 	pb "github.com/go-programming-tour-book/tag-service/proto"
 	"github.com/go-programming-tour-book/tag-service/server"
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
@@ -77,11 +79,35 @@ func RunHttpServer() *http.ServeMux {
 
 // 保持实现了 gRPC Server 的相关逻辑，仅是重新封装为 RunGrpcServer 方法
 func RunGrpcServer() *grpc.Server {
-	s := grpc.NewServer()
+	// 一元拦截器
+	opts := []grpc.ServerOption{
+		grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
+			middleware.AccessLog, // 访问日志拦截器
+			middleware.ErrorLog,  // 错误日志拦截器
+			middleware.Recovery,  // 异常补抓拦截器
+			// HelloInterceptor,
+			// WorldInterceptor,
+		)),
+	}
+	s := grpc.NewServer(opts...)
 	pb.RegisterTagServiceServer(s, server.NewTagServer())
 	reflection.Register(s)
 
 	return s
+}
+
+func HelloInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+	log.Println("你好开始")
+	resp, err := handler(ctx, req)
+	log.Println("你好结束")
+	return resp, err
+}
+
+func WorldInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+	log.Println("世界开始")
+	resp, err := handler(ctx, req)
+	log.Println("世界结束")
+	return resp, err
 }
 
 func runGrpcGatewayServer() *runtime.ServeMux {

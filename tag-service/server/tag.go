@@ -16,6 +16,7 @@ func NewTagServer() *TagServer {
 }
 
 func (t *TagServer) GetTagList(ctx context.Context, r *pb.GetTagListRequest) (*pb.GetTagListReply, error) {
+	// panic("测试抛出异常！")
 	// 指定博客后端的服务地址
 	api := bapi.NewAPI("http://127.0.0.1:8080")
 	// 调用 GetTagList 方法的 API 获取标签列表数据
