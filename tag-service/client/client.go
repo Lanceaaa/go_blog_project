@@ -12,13 +12,37 @@ import (
 	"google.golang.org/grpc/codes"
 )
 
+type Auth struct {
+	AppKey    string
+	AppSecret string
+}
+
+func (a *Auth) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
+	return map[string]string{"app_key": a.AppKey, "app_secret": a.AppSecret}, nil
+}
+
+func (a *Auth) RequireTransportSecurity() bool {
+	return false
+}
+
 func main() {
+	auth := Auth{
+		AppKey:    "go-programming-tour-book",
+		AppSecret: "lance",
+	}
 	ctx := context.Background()
+	opts := []grpc.DialOption{grpc.WithPerRPCCredentials(&auth), grpc.WithUnaryInterceptor(
+		grpc_middleware.ChainUnaryClient(middleware.UnaryContextTimeout()),
+	)}
 	// 创建给定目标的客户端连接，另外我们所要请求的服务端是非加密模式的，因此我们调用了 grpc.WithInsecure 方法禁用了此 ClientConn 的传输安全性验证
 	// 调用时需要将超时控制的拦截器注册进去
-	clientConn, _ := GetClientConn(ctx, "localhost:8001", []grpc.DialOption{grpc.WithUnaryInterceptor(
-		grpc_middleware.ChainUnaryClient(middleware.UnaryContextTimeout()),
-	)})
+	// clientConn, _ := GetClientConn(ctx, "localhost:8001", []grpc.DialOption{grpc.WithUnaryInterceptor(
+	// 	grpc_middleware.ChainUnaryClient(middleware.UnaryContextTimeout()),
+	// )})
+	clientConn, err := GetClientConn(ctx, "localhost:8001", opts)
+	if err != nil {
+		log.Fatalf("err: %v", err)
+	}
 	defer clientConn.Close()
 
 	// 初始化指定 RPC Proto Service 的客户端实例对象

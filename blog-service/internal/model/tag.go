@@ -1,8 +1,6 @@
 package model
 
 import (
-	"time"
-
 	"github.com/go-programming-tour-book/blog-service/pkg/app"
 	"github.com/jinzhu/gorm"
 )
@@ -40,7 +38,8 @@ func (t Tag) Count(db *gorm.DB) (int, error) {
 
 // 获取标签数据列表
 func (t Tag) List(db *gorm.DB, pageOffset, pageSize int) ([]*Tag, error) {
-	time.Sleep(time.Minute)
+	// 假设服务端这边获取数据延迟
+	// time.Sleep(time.Minute)
 	var tags []*Tag
 	var err error
 	if pageOffset >= 0 && pageSize > 0 {
