@@ -192,3 +192,9 @@ protoc -I/usr/local/include -I. -I$GOPATH/src -I$GOPATH/pkg/mod/github.com/grpc-
 ```bash
 go get -u github.com/grpc-ecosystem/go-grpc-middleware@v1.1.0
 ```
+
+# 使用 Jaeger 进行链路追踪
+```bash
+go get -u github.com/opentracing/opentracing-go@v1.1.0
+go get -u github.com/uber/jaeger-client-go@v2.22.1
+```

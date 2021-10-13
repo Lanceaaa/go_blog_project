@@ -85,6 +85,8 @@ func RunGrpcServer() *grpc.Server {
 			middleware.AccessLog, // 访问日志拦截器
 			middleware.ErrorLog,  // 错误日志拦截器
 			middleware.Recovery,  // 异常补抓拦截器
+			// 链路追踪这个出先出：runtime error: invalid memory address or nil pointer dereference, stack: goroutine 8 [running]这个问题
+			// middleware.ServerTracing, // 链路追踪拦截器
 			// HelloInterceptor,
 			// WorldInterceptor,
 		)),

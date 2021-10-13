@@ -31,9 +31,7 @@ func main() {
 		AppSecret: "lance",
 	}
 	ctx := context.Background()
-	opts := []grpc.DialOption{grpc.WithPerRPCCredentials(&auth), grpc.WithUnaryInterceptor(
-		grpc_middleware.ChainUnaryClient(middleware.UnaryContextTimeout()),
-	)}
+	opts := []grpc.DialOption{grpc.WithPerRPCCredentials(&auth)}
 	// 创建给定目标的客户端连接，另外我们所要请求的服务端是非加密模式的，因此我们调用了 grpc.WithInsecure 方法禁用了此 ClientConn 的传输安全性验证
 	// 调用时需要将超时控制的拦截器注册进去
 	// clientConn, _ := GetClientConn(ctx, "localhost:8001", []grpc.DialOption{grpc.WithUnaryInterceptor(
@@ -59,6 +57,7 @@ func GetClientConn(ctx context.Context, target string, opts []grpc.DialOption) (
 	opts = append(opts, grpc.WithUnaryInterceptor(
 		grpc_middleware.ChainUnaryClient(
 			middleware.UnaryContextTimeout(),
+			middleware.ClientTracing(),
 		),
 	))
 	opts = append(opts, grpc.WithStreamInterceptor(

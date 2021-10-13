@@ -183,11 +183,13 @@ func (l *Logger) Infof(format string, v ...interface{}) {
 
 // func (l *Logger) Info(ctx context.Context, v ...interface{}) {
 // 	l = l.WithLevel(LevelInfo).WithContext(ctx).WithTrace()
+//  l.WithContext(ctx).WithTrace().Output(LevelInfo, fmt.Sprint(v...))
 // 	l.Output(LevelInfo, fmt.Sprint(v...))
 // }
 
 // func (l *Logger) Infof(ctx context.Context, format string, v ...interface{}) {
 // 	l = l.WithLevel(LevelInfo).WithContext(ctx).WithTrace()
+//  l.WithContext(ctx).WithTrace().Output(LevelInfo, fmt.Sprintf(format, v...))
 // 	l.Output(LevelInfo, fmt.Sprintf(format, v...))
 // }
 
