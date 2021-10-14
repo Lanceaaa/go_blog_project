@@ -198,3 +198,34 @@ go get -u github.com/grpc-ecosystem/go-grpc-middleware@v1.1.0
 go get -u github.com/opentracing/opentracing-go@v1.1.0
 go get -u github.com/uber/jaeger-client-go@v2.22.1
 ```
+
+# 下载、安装和启动 etcd
+```bash
+wget https://github.com/etcd-io/etcd/releases/download/v3.4.17/etcd-v3.4.17-linux-amd64.tar.gz
+tar -zxf etcd-v3.4.17-linux-amd64.tar.gz
+cd etcd-v3.4.17-linux-amd64
+mv etcd /usr/local/bin
+ETCDTL_API=3 && etcd
+```
+
+# 安装 etcd client sdk
+```bash
+# go get go.etcd.io/etcd/client/v3
+go get google.golang.org/grpc@1.26.0
+go get github.com/coreos/etcd/clientv3@v3.3.18
+# 如果拉取过程中出现/go-system模块的相关报错，则在go.mod添加replace来解决这个问题
+replace github.com/coreos/go-systemd => github.com/coreos/go-systemd/v22v22.0.0
+```
+
+# 初始化 protoc 的项目
+```bash
+go mod init github.com/go-programming-tour-book/protoc-gen-go-tour
+```
+
+# 编译生成 pb.go 文件
+```bash
+go build .
+mv ./protoc-gen-go-tour /go/bin
+# 拷贝 tag.proto 命名为tour.proto
+protoc -I/usr/local/include -I. -I$GOPATH/src -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway\@v1.14.5/third_party/googleapis --go-tour_out=plugins=tour:. ./proto/tour.proto
+```

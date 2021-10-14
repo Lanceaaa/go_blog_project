@@ -4,11 +4,13 @@ import (
 	"context"
 	"encoding/json"
 	"flag"
+	"fmt"
 	"log"
 	"net"
 	"net/http"
 	"path"
 	"strings"
+	"time"
 
 	assetfs "github.com/elazarl/go-bindata-assetfs"
 	"github.com/go-programming-tour-book/tag-service/internal/middleware"
@@ -17,6 +19,11 @@ import (
 	"github.com/go-programming-tour-book/tag-service/server"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+
+	// clientv3 "go.etcd.io/etcd/client/v3"
+	// "go.etcd.io/etcd/proxy/grpcproxy"
+	"github.com/coreos/etcd/clientv3"
+	"github.com/coreos/etcd/proxy/grpcproxy"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"google.golang.org/grpc"
@@ -32,6 +39,15 @@ func init() {
 	flag.Parse()
 }
 
+const SERVICE_NAME = "tag-service"
+
+func main() {
+	err := RunServer(port)
+	if err != nil {
+		log.Fatalf("Run Serve err: %v", err)
+	}
+}
+
 // 拆分 TCP 的逻辑
 func RunTCPServer(port string) (net.Listener, error) {
 	return net.Listen("tcp", ":"+port)
@@ -44,6 +60,20 @@ func RunServer(port string) error {
 	gatewayMux := runGrpcGatewayServer()
 
 	httpMux.Handle("/", gatewayMux)
+
+	// 创建 etcd 实例
+	etcdClient, err := clientv3.New(clientv3.Config{
+		Endpoints:   []string{"http://localhost:2379"},
+		DialTimeout: time.Second * 60,
+	})
+	if err != nil {
+		return err
+	}
+	defer etcdClient.Close()
+
+	target := fmt.Sprintf("/etcdv3://go-programming-tour-book/grpc/%s", SERVICE_NAME)
+	// 服务信息注册
+	grpcproxy.Register(etcdClient, target, ":"+port, 60)
 
 	return http.ListenAndServe(":"+port, grpcHandlerFunc(grpcS, httpMux))
 }
@@ -163,11 +193,4 @@ func grpcGatewayError(ctx context.Context, _ *runtime.ServeMux, marshaler runtim
 	w.Header().Set("Content-type", marshaler.ContentType())
 	w.WriteHeader(runtime.HTTPStatusFromCode(s.Code()))
 	_, _ = w.Write(resp)
-}
-
-func main() {
-	err := RunServer(port)
-	if err != nil {
-		log.Fatalf("Run Serve err: %v", err)
-	}
 }

@@ -2,8 +2,12 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
+	"time"
 
+	"github.com/coreos/etcd/clientv3"
+	"github.com/coreos/etcd/clientv3/naming"
 	"github.com/go-programming-tour-book/tag-service/internal/middleware"
 	pb "github.com/go-programming-tour-book/tag-service/proto"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
@@ -37,7 +41,7 @@ func main() {
 	// clientConn, _ := GetClientConn(ctx, "localhost:8001", []grpc.DialOption{grpc.WithUnaryInterceptor(
 	// 	grpc_middleware.ChainUnaryClient(middleware.UnaryContextTimeout()),
 	// )})
-	clientConn, err := GetClientConn(ctx, "localhost:8001", opts)
+	clientConn, err := GetClientConn(ctx, "tag-service", opts)
 	if err != nil {
 		log.Fatalf("err: %v", err)
 	}
@@ -51,8 +55,20 @@ func main() {
 	log.Printf("resp: %v", resp)
 }
 
-func GetClientConn(ctx context.Context, target string, opts []grpc.DialOption) (*grpc.ClientConn, error) {
-	opts = append(opts, grpc.WithInsecure())
+func GetClientConn(ctx context.Context, serviceName string, opts []grpc.DialOption) (*grpc.ClientConn, error) {
+	config := clientv3.Config{
+		Endpoints:   []string{"http://localhost:2379"},
+		DialTimeout: time.Second * 60,
+	}
+	cli, err := clientv3.New(config)
+	if err != nil {
+		return nil, err
+	}
+
+	r := &naming.GRPCResolver{Client: cli}
+	target := fmt.Sprintf("/etcdv3://go-programming-tour-book/grpc/%s", serviceName)
+
+	opts = append(opts, grpc.WithInsecure(), grpc.WithBalancer(grpc.RoundRobin(r)), grpc.WithBlock())
 	// 一元调用和流式调用添加对应的客户端拦截器
 	opts = append(opts, grpc.WithUnaryInterceptor(
 		grpc_middleware.ChainUnaryClient(
