@@ -1,0 +1,108 @@
+2021/11/16 07:57:37 [From DB] find key key4
+2021/11/16 07:57:37 [From DB] find key key2
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key1
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key3
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key key4
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key3
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key1
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key2
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key key3
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key4
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key1
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key2
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key key4
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key2
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key3
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key1
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key key4
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key1
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key3
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key2
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key key2
+2021/11/16 07:57:37 [From DB] find key key3
+2021/11/16 07:57:37 [From DB] find key key1
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key4
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key key3
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key4
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key1
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key2
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key key3
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key4
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key1
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key2
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key key4
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key1
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key2
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key3
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key key4
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key1
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key2
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key key3
+2021/11/16 07:57:37 [TourCache] hit
+2021/11/16 07:57:37 [From DB] find key unknown
+2021/11/16 07:57:37 [From DB] find key unknown
+PASS
+ok  	github.com/go-programming-tour-book/cache	0.005s
+PASS
+ok  	github.com/go-programming-tour-book/cache/fifo	0.004s
+PASS
+ok  	github.com/go-programming-tour-book/cache/lfu	0.004s
+PASS
+ok  	github.com/go-programming-tour-book/cache/lru	0.004s
